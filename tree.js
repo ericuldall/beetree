@@ -21,27 +21,19 @@ class Tree {
 
 	balance(){
 		let list = this.flatten();
-		let newRoot = list.splice(Math.round((list.length - 1) / 2), 1)[0];
+		let newRoot = list.splice(Math.floor((list.length - 1) / 2), 1)[0];
 		this.root = new Node(newRoot.index, newRoot.data);
 		while(list.length > 1){
-			let node = list.splice(Math.round((list.length - 1) / 2), 1)[0];
-			this.push(node.index, node.data);
+			let left = list.splice(0, Math.floor(list.length / 2));
+			let right= list;
+			let left_node = left.splice(Math.floor((list.length - 1) / 2), 1)[0];
+			let right_node = right.splice(Math.floor((list.length - 1) / 2), 1)[0];
+			this.push(left_node.index, left_node.data);
+			this.push(right_node.index, right_node.data);
+			list=left.concat(right);
 		}
-		this.push(list[0].index, list[0].data);
+		if( list.length ){ this.push(list[0].index, list[0].data); }
 	}
 }
 
 module.exports = Tree;
-/*
-var bst = new Tree;
-bst.push(1, {foo: 'bar'});
-bst.push(4, {});
-bst.push(6, {});
-bst.push(3, {});
-bst.push(12, {});
-bst.push(22, {});
-bst.push(45, {});
-bst.push(2, {});
-bst.balance();
-console.log(JSON.stringify(bst, null, 4));
-*/
