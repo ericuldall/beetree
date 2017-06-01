@@ -22,10 +22,12 @@ class Node {
 	}
 
 	find(index){
-		if( index <= this.getIndex() ){
-			return this.getLeft().constructor.name === 'Node' ? this.getLeft().find(index) : this;
+		if( index < this.getIndex() ){
+			return this.getLeft().constructor.name === 'Node' ? this.getLeft().find(index) : null;
+		}else if( index === this.getIndex() ){
+			return this;
 		}else{
-			return this.getRight().constructor.name === 'Node' ? this.getRight().find(index) : this;
+			return this.getRight().constructor.name === 'Node' ? this.getRight().find(index) : null;
 		}
 	}
 
