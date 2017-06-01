@@ -1,6 +1,10 @@
-#BeeTree
+# BeeTree
 
 ## A simple implementation of a binary search tree that can be balanced on demand
+
+```
+npm install --save beetree
+```
 
 ```
 var Tree = require('beetree');
