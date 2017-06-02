@@ -19,3 +19,9 @@ console.log('GETTER:', bst.find(5).get('chew'));
 bst.balance();
 console.log(JSON.stringify(bst, null, 4));
 ```
+
+### Complexity
+
+.push - O(log n)
+.find - O(log n)
+.balance - O(n log n) || O(n^3)
