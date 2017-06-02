@@ -22,6 +22,6 @@ console.log(JSON.stringify(bst, null, 4));
 
 ### Complexity
 
-.push - O(log n)
-.find - O(log n)
-.balance - O(n log n) || O(n^3)
+1. .push - O(log n)
+2. .find - O(log n)
+3. .balance - O(n log n) || O(n^3)
