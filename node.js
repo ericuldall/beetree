@@ -9,6 +9,10 @@ class Node {
 		this.right	= new NullNode;
 	}
 
+	setIndex(index){
+		this.index = index;
+	}
+
 	getIndex(){
 		return this.index;
 	}
@@ -29,6 +33,10 @@ class Node {
 		}else{
 			return this.getRight().constructor.name === 'Node' ? this.getRight().find(index) : null;
 		}
+	}
+
+	setData(data){
+		this.data = data;
 	}
 
 	getData(){
@@ -63,6 +71,22 @@ class Node {
 		return 1 + Math.max(this.getLeft().getHeight(), this.getRight().getHeight());
 	}
 
+	getProgeny(node){
+		if( typeof node === "undefined" ){
+			node = this.getLeft();
+			if( node.constructor.name === 'NullNode' ){
+				return this.getRight();
+			}
+		}
+
+		let nextNode = node.getRight();
+		if( nextNode.constructor.name === 'NullNode' ){
+			return node;
+		}else{
+			return this.getProgeny(nextNode);
+		}
+	}
+
 	flatten(){
 		let results = [this.export()]
 		if( this.getLeft().constructor.name === 'Node' ){
@@ -76,8 +100,16 @@ class Node {
 		return results;
 	}
 
-	export(){
-		return {index: this.getIndex(), data: this.getData()};
+	export(preserve){
+		return {index: this.getIndex(), data: this.getData(), __ref: this};
+	}
+
+	delete() {
+		Object.setPrototypeOf(this, new NullNode);
+		delete this.index;
+		delete this.data;
+		delete this.left;
+		delete this.right;
 	}
 
 }

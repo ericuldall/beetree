@@ -15,6 +15,26 @@ class Tree {
 		return this.root.find(index);
 	}
 
+	delete(index){
+		let node = this.find(index);
+		if( node ){
+			node = (this.root.getIndex() === node.getIndex()) ? this.root : node;
+			let progeny = node.getProgeny();
+			if( progeny.constructor.name === 'Node' ){
+				if( progeny.getLeft().constructor.name === 'NullNode' && progeny.getRight().constructor.name === 'NullNode' ){
+					node.setIndex(progeny.getIndex());
+					node.setData(progeny.getData());
+				}else{
+					node = progeny;
+				}
+				progeny.delete();
+			}
+			return true;
+		}
+
+		return null;
+	}
+
 	flatten(){
 		return this.root.flatten().sort(function(a,b){ return (a.index > b.index ? 1 : (a.index < b.index ? -1 : 0)); });
 	}
